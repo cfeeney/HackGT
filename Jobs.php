@@ -20,8 +20,8 @@ class Jobs
 	public function get_state_jobs($state) {
 		$con=mysqli_connect('localhost','root','password','jobmapping');
                 if (!mysqli_connect_errno()) {
-                        $query = "select jobs.name, jobs.link from jobs left join states on (states.id = jobs.state_id) left join industries on (industries.id = jobs.industry_id) where industry_id = 1 and states.abbreviation = '" . $state . "'";
-                        $result = mysqli_query($con,$query);
+		$query = "select jobs.name, jobs.link from jobs left join states on (jobs.state_id = states.id) left join industries on (jobs.industry_id = industries.id) where states.abbreviation = '" . $state . "' and industries.id = 1 limit 20";
+			$result = mysqli_query($con,$query);
                         $rows = array();
                         while($row = mysqli_fetch_assoc($result))
                         {
